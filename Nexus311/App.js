@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   Platform,
   SafeAreaView,
+  Linking,
 } from "react-native";
 import * as Notifications from "expo-notifications";
 import * as Location from "expo-location";
@@ -94,6 +95,7 @@ export default function App() {
 
   const onNavigationStateChange = (navState) => {
     const currentUrl = navState.url;
+    console.log("Current URL:", currentUrl);
     try {
       if (
         currentUrl.endsWith("deviceType=ios") ||
@@ -114,13 +116,32 @@ export default function App() {
       <WebView
         ref={webViewRef}
         source={{
-          uri: "https://311qa2-dev-ed.develop.my.site.com/311LWR",
+          uri: "https://311qa2-dev-ed.develop.my.site.com/311LWR?deviceType=ios",
         }}
         onNavigationStateChange={onNavigationStateChange}
         onError={(event) => {
           console.log(event);
           alert(`Webview Error : ${event.nativeEvent.description}`);
         }}
+        userAgent={Platform.OS === "ios" ?
+          "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1" :
+          undefined}
+        // Essential WebView properties
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        sharedCookiesEnabled={true}
+        cacheEnabled={true}
+        // Allow navigation
+        allowsBackForwardNavigationGestures={true}
+        // Security
+        originWhitelist={['*']}
+        // Critical for about:srcdoc errors - force all pages to stay in main frame
+        setSupportMultipleWindows={false}
+        // Ensure iframes are handled properly
+        allowFileAccess={true}
+        allowUniversalAccessFromFileURLs={true}
+        allowFileAccessFromFileURLs={true}
+        webviewDebuggingEnabled={true}
       />
       {shouldShowBackButton && (
         <View style={styles.navBar}>

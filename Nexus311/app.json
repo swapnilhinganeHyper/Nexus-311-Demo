@@ -13,7 +13,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.stacknexus.Nexus311",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -23,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/playstore.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bf8921a8-b1a8-42d3-ab06-066270f58af3"
+      }
     }
   }
 }
