@@ -49,7 +49,7 @@ export default function App() {
     }
   };
 
-  // Function to request camera and location permissions
+  // Function to request camera and location permissions.
   const registerForPermissions = async () => {
     // Request camera permission
     const { status: existingCameraStatus } =
